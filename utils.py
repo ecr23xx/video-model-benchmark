@@ -25,7 +25,6 @@ def parse_args():
     return parser.parse_args()
 
 
-
 def setup_logger(save_dir):
     logger = logging.getLogger('cnnbenchmark.')
     logger.setLevel(logging.DEBUG)
