@@ -13,6 +13,12 @@ def parse_args():
         default=0,
         type=str,
     )
+    parser.add_argument(
+        "opts",
+        help="See SlowFast/config/defaults.py for all options",
+        default=None,
+        nargs=argparse.REMAINDER,
+    )
 
     if len(sys.argv) == 1:
         parser.print_help()

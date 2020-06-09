@@ -5,7 +5,7 @@ from benchmark import benchmark_run
 
 def main():
     args = parse_args()
-    model, is_3d = build_model(args.model)
+    model, is_3d = build_model(args.model, args.opts)
     benchmark_run(model, is_3d)
 
 
