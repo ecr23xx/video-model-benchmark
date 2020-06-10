@@ -238,6 +238,7 @@ class BottleneckTransform(nn.Module):
         # Branch2c
         x = self.c(x)
         x = self.c_bn(x)
+        self.output = x
         return x
 
 
@@ -420,6 +421,7 @@ class ResBlock(nn.Module):
         else:
             x = x + self.branch2(x)
         x = self.relu(x)
+        self.output = x
         return x
 
 
@@ -623,4 +625,5 @@ class ResStage(nn.Module):
                         x = x.permute(0, 2, 1, 3, 4)
             output.append(x)
 
+        self.output = output
         return output

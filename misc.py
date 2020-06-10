@@ -37,37 +37,30 @@ def cpu_mem_usage():
     return usage
 
 
-def get_flop_stats(model, is_3d):
+def get_flop_stats(model):
     """
     Compute the gflops for the current model given the config.
     Args:
         model (model): model to compute the flop counts.
-        is_3d (bool): if True, prepare data for 3d convolution. Otherwise,
-            prepare data for 2d convolution.
 
     Returns:
         float: the total number of gflops of the given model.
     """
     device = torch.cuda.current_device()
 
-    if is_3d:
-        flop_inputs = [torch.rand(3, 16, 224, 224).unsqueeze(0).to(device)]
-    else:
-        flop_inputs = torch.rand(3, 224, 224).unsqueeze(0).to(device)
+    flop_inputs = [torch.rand(3, 16, 224, 224).unsqueeze(0).to(device)]
 
     gflop_dict, _ = flop_count(model, (flop_inputs, ))
     gflops = sum(gflop_dict.values())
     return gflops
 
 
-def log_model_info(model, is_3d=False):
+def log_model_info(model):
     """
     Log info, includes number of parameters, gpu usage and gflops.
     Args:
         model (model): model to log the info.
-        is_3d (bool): if True, prepare data for 3d convolution. Otherwise,
-            prepare data for 2d convolution.
     """
     print("Params: {:,}".format(params_count(model)))
     print("GPU Mem: {:,} MB".format(gpu_mem_usage()))
-    print("FLOPs: {:,} GFLOPs\n".format(get_flop_stats(model, is_3d)))
+    print("FLOPs: {:,} GFLOPs\n".format(get_flop_stats(model)))

@@ -1,4 +1,5 @@
 import functools
+import torch.nn as nn
 import torch.autograd.profiler as tprofiler
 from collections import namedtuple, defaultdict, OrderedDict
 
@@ -7,16 +8,13 @@ Measure = namedtuple(
     "Measure", ["self_cpu_total", "cpu_total", "cuda_total", "occurrences"])
 
 
-def walk_modules(module, name="", path=()):
-    """Generator. Walks through a PyTorch Module and outputs Trace tuples"""
-    if not name:
-        name = module.__class__.__name__
-    named_children = list(module.named_children())
-    path = path + (name,)
-    yield Trace(path, len(named_children) == 0, module)
-    # recursively walk into all submodules
-    for name, child_module in named_children:
-        yield from walk_modules(child_module, name=name, path=path)
+def depth(l):
+    depths = [depth(item) for item in l if isinstance(item, (
+        list, tuple, nn.Sequential
+    ))]
+    if len(depths) > 0:
+        return 1 + max(depths)
+    return 1
 
 
 class Profile(object):
@@ -41,7 +39,8 @@ class Profile(object):
             raise RuntimeError("torchprof profiler is not reentrant")
         self.entered = True
         self._forwards = {}  # store the original forward functions
-        self.traces = tuple(map(self._hook_trace, walk_modules(self._model)))
+        self.traces = tuple(
+            map(self._hook_trace, self.walk_modules(self._model)))
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
@@ -89,6 +88,17 @@ class Profile(object):
         ):
             module.forward = self._forwards[path]
 
+    def walk_modules(self, module, name="", path=()):
+        """Generator. Walks through a PyTorch Module and outputs Trace tuples"""
+        if not name:
+            name = module.__class__.__name__
+        named_children = list(module.named_children())
+        path = path + (name,)
+        yield Trace(path, len(named_children) == 1, module)
+        # recursively walk into all submodules
+        for name, child_module in named_children:
+            yield from self.walk_modules(child_module, name=name, path=path)
+
     def raw(self):
         if self.exited:
             return (self.traces, self.trace_profile_events)
@@ -112,42 +122,58 @@ class BackwardProfile(Profile):
             raise RuntimeError("torchprof profiler is not reentrant")
         self.entered = True
         self._backwards = {}  # store the original backward functions
-        self.traces = tuple(map(self._hook_trace, walk_modules(self._model)))
+        self.traces = tuple(
+            map(self._hook_trace, self.walk_modules(self._model)))
         return self
 
     def _hook_trace(self, trace):
-        [path, leaf, module] = trace
+        [path, leaf, output] = trace
         if (self.paths is not None and path in self.paths) or (
             self.paths is None and leaf
         ):
-            _backward = module.backward
-            self._backwards[path] = _backward
+            # self._backwards[path] = output.grad_fn
 
-            @functools.wraps(_backward)
+            @functools.wraps(output.grad_fn)
             def wrap_backward(*args, **kwargs):
                 with tprofiler.profile(use_cuda=self.use_cuda) as prof:
-                    res = _backward(*args, **kwargs)
+                    res = output.grad_fn(*args, **kwargs)
                 event_list = prof.function_events
                 event_list.populate_cpu_children()
                 # each profile call should be contained in its own list
                 self.trace_profile_events[path].append(event_list)
                 return res
-
-            module.backward = wrap_backward
         return trace
 
-    def _remove_hook_trace(self, trace):
-        [path, leaf, module] = trace
-        if (self.paths is not None and path in self.paths) or (
-            self.paths is None and leaf
-        ):
-            module.backward = self._backwards[path]
+    # def _remove_hook_trace(self, trace):
+    #     [path, leaf, output] = trace
+    #     if (self.paths is not None and path in self.paths) or (
+    #         self.paths is None and leaf
+    #     ):
+    #         output.grad_fn = self._backwards[path]
+
+    def walk_modules(self, module, name="", path=()):
+        if hasattr(module, 'output'):
+            if not name:
+                name = module.__class__.__name__
+            named_children = list(module.named_children())
+            path = path + (name,)
+            leaf = True
+            for _, child_module in named_children:
+                if hasattr(child_module, 'output'):
+                    leaf = False
+            # recursively walk into all submodules
+            if isinstance(module.output, list):
+                yield Trace(path, leaf, module.output[0])
+            else:
+                yield Trace(path, leaf, module.output)
+            for name, child_module in named_children:
+                yield from self.walk_modules(child_module, name=name, path=path)
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         if not self.enabled:
             return
-        tuple(map(self._remove_hook_trace, self.traces))
-        del self._backwards  # remove unnecessary forwards
+        # tuple(map(self._remove_hook_trace, self.traces))
+        # del self._backwards  # remove unnecessary forwards
         self.exited = True
 
 

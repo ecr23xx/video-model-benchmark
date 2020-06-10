@@ -217,6 +217,7 @@ class ResNetBasicHead(nn.Module):
             x = x.mean([1, 2, 3])
 
         x = x.view(x.shape[0], -1)
+        self.output = x
         return x
 
 

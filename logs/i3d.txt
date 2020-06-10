@@ -1,0 +1,520 @@
+Profile model i3d
+
+Model info: ResNet(
+  (s1): VideoModelStem(
+    (pathway0_stem): ResNetBasicStem(
+      (conv): Conv3d(3, 64, kernel_size=[5, 7, 7], stride=[1, 2, 2], padding=[2, 3, 3], bias=False)
+      (bn): BatchNorm3d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (pool_layer): MaxPool3d(kernel_size=[1, 3, 3], stride=[1, 2, 2], padding=[0, 1, 1], dilation=1, ceil_mode=False)
+    )
+  )
+  (s2): ResStage(
+    (pathway0_res0): ResBlock(
+      (branch1): Conv3d(64, 256, kernel_size=(1, 1, 1), stride=[1, 1, 1], bias=False)
+      (branch1_bn): BatchNorm3d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (branch2): BottleneckTransform(
+        (a): Conv3d(64, 64, kernel_size=[3, 1, 1], stride=[1, 1, 1], padding=[1, 0, 0], bias=False)
+        (a_bn): BatchNorm3d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (a_relu): ReLU(inplace=True)
+        (b): Conv3d(64, 64, kernel_size=[1, 3, 3], stride=[1, 1, 1], padding=[0, 1, 1], dilation=[1, 1, 1], bias=False)
+        (b_bn): BatchNorm3d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (b_relu): ReLU(inplace=True)
+        (c): Conv3d(64, 256, kernel_size=[1, 1, 1], stride=[1, 1, 1], padding=[0, 0, 0], bias=False)
+        (c_bn): BatchNorm3d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (relu): ReLU(inplace=True)
+    )
+    (pathway0_res1): ResBlock(
+      (branch2): BottleneckTransform(
+        (a): Conv3d(256, 64, kernel_size=[3, 1, 1], stride=[1, 1, 1], padding=[1, 0, 0], bias=False)
+        (a_bn): BatchNorm3d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (a_relu): ReLU(inplace=True)
+        (b): Conv3d(64, 64, kernel_size=[1, 3, 3], stride=[1, 1, 1], padding=[0, 1, 1], dilation=[1, 1, 1], bias=False)
+        (b_bn): BatchNorm3d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (b_relu): ReLU(inplace=True)
+        (c): Conv3d(64, 256, kernel_size=[1, 1, 1], stride=[1, 1, 1], padding=[0, 0, 0], bias=False)
+        (c_bn): BatchNorm3d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (relu): ReLU(inplace=True)
+    )
+    (pathway0_res2): ResBlock(
+      (branch2): BottleneckTransform(
+        (a): Conv3d(256, 64, kernel_size=[3, 1, 1], stride=[1, 1, 1], padding=[1, 0, 0], bias=False)
+        (a_bn): BatchNorm3d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (a_relu): ReLU(inplace=True)
+        (b): Conv3d(64, 64, kernel_size=[1, 3, 3], stride=[1, 1, 1], padding=[0, 1, 1], dilation=[1, 1, 1], bias=False)
+        (b_bn): BatchNorm3d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (b_relu): ReLU(inplace=True)
+        (c): Conv3d(64, 256, kernel_size=[1, 1, 1], stride=[1, 1, 1], padding=[0, 0, 0], bias=False)
+        (c_bn): BatchNorm3d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (relu): ReLU(inplace=True)
+    )
+  )
+  (pathway0_pool): MaxPool3d(kernel_size=[2, 1, 1], stride=[2, 1, 1], padding=[0, 0, 0], dilation=1, ceil_mode=False)
+  (s3): ResStage(
+    (pathway0_res0): ResBlock(
+      (branch1): Conv3d(256, 512, kernel_size=(1, 1, 1), stride=[1, 2, 2], bias=False)
+      (branch1_bn): BatchNorm3d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (branch2): BottleneckTransform(
+        (a): Conv3d(256, 128, kernel_size=[3, 1, 1], stride=[1, 1, 1], padding=[1, 0, 0], bias=False)
+        (a_bn): BatchNorm3d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (a_relu): ReLU(inplace=True)
+        (b): Conv3d(128, 128, kernel_size=[1, 3, 3], stride=[1, 2, 2], padding=[0, 1, 1], dilation=[1, 1, 1], bias=False)
+        (b_bn): BatchNorm3d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (b_relu): ReLU(inplace=True)
+        (c): Conv3d(128, 512, kernel_size=[1, 1, 1], stride=[1, 1, 1], padding=[0, 0, 0], bias=False)
+        (c_bn): BatchNorm3d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (relu): ReLU(inplace=True)
+    )
+    (pathway0_res1): ResBlock(
+      (branch2): BottleneckTransform(
+        (a): Conv3d(512, 128, kernel_size=[1, 1, 1], stride=[1, 1, 1], padding=[0, 0, 0], bias=False)
+        (a_bn): BatchNorm3d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (a_relu): ReLU(inplace=True)
+        (b): Conv3d(128, 128, kernel_size=[1, 3, 3], stride=[1, 1, 1], padding=[0, 1, 1], dilation=[1, 1, 1], bias=False)
+        (b_bn): BatchNorm3d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (b_relu): ReLU(inplace=True)
+        (c): Conv3d(128, 512, kernel_size=[1, 1, 1], stride=[1, 1, 1], padding=[0, 0, 0], bias=False)
+        (c_bn): BatchNorm3d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (relu): ReLU(inplace=True)
+    )
+    (pathway0_res2): ResBlock(
+      (branch2): BottleneckTransform(
+        (a): Conv3d(512, 128, kernel_size=[3, 1, 1], stride=[1, 1, 1], padding=[1, 0, 0], bias=False)
+        (a_bn): BatchNorm3d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (a_relu): ReLU(inplace=True)
+        (b): Conv3d(128, 128, kernel_size=[1, 3, 3], stride=[1, 1, 1], padding=[0, 1, 1], dilation=[1, 1, 1], bias=False)
+        (b_bn): BatchNorm3d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (b_relu): ReLU(inplace=True)
+        (c): Conv3d(128, 512, kernel_size=[1, 1, 1], stride=[1, 1, 1], padding=[0, 0, 0], bias=False)
+        (c_bn): BatchNorm3d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (relu): ReLU(inplace=True)
+    )
+    (pathway0_res3): ResBlock(
+      (branch2): BottleneckTransform(
+        (a): Conv3d(512, 128, kernel_size=[1, 1, 1], stride=[1, 1, 1], padding=[0, 0, 0], bias=False)
+        (a_bn): BatchNorm3d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (a_relu): ReLU(inplace=True)
+        (b): Conv3d(128, 128, kernel_size=[1, 3, 3], stride=[1, 1, 1], padding=[0, 1, 1], dilation=[1, 1, 1], bias=False)
+        (b_bn): BatchNorm3d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (b_relu): ReLU(inplace=True)
+        (c): Conv3d(128, 512, kernel_size=[1, 1, 1], stride=[1, 1, 1], padding=[0, 0, 0], bias=False)
+        (c_bn): BatchNorm3d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (relu): ReLU(inplace=True)
+    )
+  )
+  (s4): ResStage(
+    (pathway0_res0): ResBlock(
+      (branch1): Conv3d(512, 1024, kernel_size=(1, 1, 1), stride=[1, 2, 2], bias=False)
+      (branch1_bn): BatchNorm3d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (branch2): BottleneckTransform(
+        (a): Conv3d(512, 256, kernel_size=[3, 1, 1], stride=[1, 1, 1], padding=[1, 0, 0], bias=False)
+        (a_bn): BatchNorm3d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (a_relu): ReLU(inplace=True)
+        (b): Conv3d(256, 256, kernel_size=[1, 3, 3], stride=[1, 2, 2], padding=[0, 1, 1], dilation=[1, 1, 1], bias=False)
+        (b_bn): BatchNorm3d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (b_relu): ReLU(inplace=True)
+        (c): Conv3d(256, 1024, kernel_size=[1, 1, 1], stride=[1, 1, 1], padding=[0, 0, 0], bias=False)
+        (c_bn): BatchNorm3d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (relu): ReLU(inplace=True)
+    )
+    (pathway0_res1): ResBlock(
+      (branch2): BottleneckTransform(
+        (a): Conv3d(1024, 256, kernel_size=[1, 1, 1], stride=[1, 1, 1], padding=[0, 0, 0], bias=False)
+        (a_bn): BatchNorm3d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (a_relu): ReLU(inplace=True)
+        (b): Conv3d(256, 256, kernel_size=[1, 3, 3], stride=[1, 1, 1], padding=[0, 1, 1], dilation=[1, 1, 1], bias=False)
+        (b_bn): BatchNorm3d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (b_relu): ReLU(inplace=True)
+        (c): Conv3d(256, 1024, kernel_size=[1, 1, 1], stride=[1, 1, 1], padding=[0, 0, 0], bias=False)
+        (c_bn): BatchNorm3d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (relu): ReLU(inplace=True)
+    )
+    (pathway0_res2): ResBlock(
+      (branch2): BottleneckTransform(
+        (a): Conv3d(1024, 256, kernel_size=[3, 1, 1], stride=[1, 1, 1], padding=[1, 0, 0], bias=False)
+        (a_bn): BatchNorm3d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (a_relu): ReLU(inplace=True)
+        (b): Conv3d(256, 256, kernel_size=[1, 3, 3], stride=[1, 1, 1], padding=[0, 1, 1], dilation=[1, 1, 1], bias=False)
+        (b_bn): BatchNorm3d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (b_relu): ReLU(inplace=True)
+        (c): Conv3d(256, 1024, kernel_size=[1, 1, 1], stride=[1, 1, 1], padding=[0, 0, 0], bias=False)
+        (c_bn): BatchNorm3d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (relu): ReLU(inplace=True)
+    )
+    (pathway0_res3): ResBlock(
+      (branch2): BottleneckTransform(
+        (a): Conv3d(1024, 256, kernel_size=[1, 1, 1], stride=[1, 1, 1], padding=[0, 0, 0], bias=False)
+        (a_bn): BatchNorm3d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (a_relu): ReLU(inplace=True)
+        (b): Conv3d(256, 256, kernel_size=[1, 3, 3], stride=[1, 1, 1], padding=[0, 1, 1], dilation=[1, 1, 1], bias=False)
+        (b_bn): BatchNorm3d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (b_relu): ReLU(inplace=True)
+        (c): Conv3d(256, 1024, kernel_size=[1, 1, 1], stride=[1, 1, 1], padding=[0, 0, 0], bias=False)
+        (c_bn): BatchNorm3d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (relu): ReLU(inplace=True)
+    )
+    (pathway0_res4): ResBlock(
+      (branch2): BottleneckTransform(
+        (a): Conv3d(1024, 256, kernel_size=[3, 1, 1], stride=[1, 1, 1], padding=[1, 0, 0], bias=False)
+        (a_bn): BatchNorm3d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (a_relu): ReLU(inplace=True)
+        (b): Conv3d(256, 256, kernel_size=[1, 3, 3], stride=[1, 1, 1], padding=[0, 1, 1], dilation=[1, 1, 1], bias=False)
+        (b_bn): BatchNorm3d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (b_relu): ReLU(inplace=True)
+        (c): Conv3d(256, 1024, kernel_size=[1, 1, 1], stride=[1, 1, 1], padding=[0, 0, 0], bias=False)
+        (c_bn): BatchNorm3d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (relu): ReLU(inplace=True)
+    )
+    (pathway0_res5): ResBlock(
+      (branch2): BottleneckTransform(
+        (a): Conv3d(1024, 256, kernel_size=[1, 1, 1], stride=[1, 1, 1], padding=[0, 0, 0], bias=False)
+        (a_bn): BatchNorm3d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (a_relu): ReLU(inplace=True)
+        (b): Conv3d(256, 256, kernel_size=[1, 3, 3], stride=[1, 1, 1], padding=[0, 1, 1], dilation=[1, 1, 1], bias=False)
+        (b_bn): BatchNorm3d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (b_relu): ReLU(inplace=True)
+        (c): Conv3d(256, 1024, kernel_size=[1, 1, 1], stride=[1, 1, 1], padding=[0, 0, 0], bias=False)
+        (c_bn): BatchNorm3d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (relu): ReLU(inplace=True)
+    )
+  )
+  (s5): ResStage(
+    (pathway0_res0): ResBlock(
+      (branch1): Conv3d(1024, 2048, kernel_size=(1, 1, 1), stride=[1, 2, 2], bias=False)
+      (branch1_bn): BatchNorm3d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (branch2): BottleneckTransform(
+        (a): Conv3d(1024, 512, kernel_size=[1, 1, 1], stride=[1, 1, 1], padding=[0, 0, 0], bias=False)
+        (a_bn): BatchNorm3d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (a_relu): ReLU(inplace=True)
+        (b): Conv3d(512, 512, kernel_size=[1, 3, 3], stride=[1, 2, 2], padding=[0, 1, 1], dilation=[1, 1, 1], bias=False)
+        (b_bn): BatchNorm3d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (b_relu): ReLU(inplace=True)
+        (c): Conv3d(512, 2048, kernel_size=[1, 1, 1], stride=[1, 1, 1], padding=[0, 0, 0], bias=False)
+        (c_bn): BatchNorm3d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (relu): ReLU(inplace=True)
+    )
+    (pathway0_res1): ResBlock(
+      (branch2): BottleneckTransform(
+        (a): Conv3d(2048, 512, kernel_size=[3, 1, 1], stride=[1, 1, 1], padding=[1, 0, 0], bias=False)
+        (a_bn): BatchNorm3d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (a_relu): ReLU(inplace=True)
+        (b): Conv3d(512, 512, kernel_size=[1, 3, 3], stride=[1, 1, 1], padding=[0, 1, 1], dilation=[1, 1, 1], bias=False)
+        (b_bn): BatchNorm3d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (b_relu): ReLU(inplace=True)
+        (c): Conv3d(512, 2048, kernel_size=[1, 1, 1], stride=[1, 1, 1], padding=[0, 0, 0], bias=False)
+        (c_bn): BatchNorm3d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (relu): ReLU(inplace=True)
+    )
+    (pathway0_res2): ResBlock(
+      (branch2): BottleneckTransform(
+        (a): Conv3d(2048, 512, kernel_size=[1, 1, 1], stride=[1, 1, 1], padding=[0, 0, 0], bias=False)
+        (a_bn): BatchNorm3d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (a_relu): ReLU(inplace=True)
+        (b): Conv3d(512, 512, kernel_size=[1, 3, 3], stride=[1, 1, 1], padding=[0, 1, 1], dilation=[1, 1, 1], bias=False)
+        (b_bn): BatchNorm3d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (b_relu): ReLU(inplace=True)
+        (c): Conv3d(512, 2048, kernel_size=[1, 1, 1], stride=[1, 1, 1], padding=[0, 0, 0], bias=False)
+        (c_bn): BatchNorm3d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (relu): ReLU(inplace=True)
+    )
+  )
+  (head): ResNetBasicHead(
+    (pathway0_avgpool): AvgPool3d(kernel_size=[4, 7, 7], stride=1, padding=0)
+    (dropout): Dropout(p=0.5, inplace=False)
+    (projection): Linear(in_features=2048, out_features=400, bias=True)
+    (act): Softmax(dim=4)
+  )
+)
+
+Params: 28,043,472
+GPU Mem: 0.10470056533813477 MB
+FLOPs: 56.814501888 GFLOPs
+
+Forward pass
+Module                | Self CPU total | CPU total | CUDA total | Occurrences
+----------------------|----------------|-----------|------------|------------
+ResNet                |                |           |            |            
+├── s1                |                |           |            |            
+│├── pathway0_stem    |                |           |            |            
+││├── conv            |      564.224us |   2.177ms |   65.180ms |           1
+││├── bn              |      475.685us |   1.286ms |    6.068ms |           1
+││├── relu            |       36.900us |  36.900us |  780.288us |           1
+││└── pool_layer      |      460.765us | 910.212us |    2.245ms |           1
+├── s2                |                |           |            |            
+│├── pathway0_res0    |                |           |            |            
+││├── branch1         |      392.062us |   1.512ms |    6.892ms |           1
+││├── branch1_bn      |      454.442us |   1.257ms |    4.809ms |           1
+││├── branch2         |                |           |            |            
+│││├── a              |      277.272us |   1.054ms |    5.197ms |           1
+│││├── a_bn           |      318.032us | 849.681us |    2.037ms |           1
+│││├── a_relu         |       29.103us |  29.103us |  209.152us |           1
+│││├── b              |      267.670us |   1.019ms |   13.221ms |           1
+│││├── b_bn           |      317.724us | 849.676us |    2.033ms |           1
+│││├── b_relu         |       28.920us |  28.920us |  208.864us |           1
+│││├── c              |      397.130us |   1.537ms |    6.957ms |           1
+│││└── c_bn           |      436.326us |   1.208ms |    4.781ms |           1
+││└── relu            |       26.678us |  26.678us |  772.192us |           1
+│├── pathway0_res1    |                |           |            |            
+││├── branch2         |                |           |            |            
+│││├── a              |      115.343us | 410.986us |    9.421ms |           1
+│││├── a_bn           |      128.337us | 289.020us |    1.482ms |           1
+│││├── a_relu         |       27.404us |  27.404us |  210.944us |           1
+│││├── b              |      108.998us | 360.886us |   12.550ms |           1
+│││├── b_bn           |      124.952us | 280.647us |    1.476ms |           1
+│││├── b_relu         |       28.316us |  28.316us |  208.352us |           1
+│││├── c              |      399.522us |   1.550ms |    6.987ms |           1
+│││└── c_bn           |      453.339us |   1.238ms |    4.788ms |           1
+││└── relu            |       26.615us |  26.615us |  772.384us |           1
+│├── pathway0_res2    |                |           |            |            
+││├── branch2         |                |           |            |            
+│││├── a              |      102.066us | 357.850us |    9.362ms |           1
+│││├── a_bn           |      128.376us | 289.278us |    1.486ms |           1
+│││├── a_relu         |       28.239us |  28.239us |  208.640us |           1
+│││├── b              |      275.079us |   1.051ms |   13.262ms |           1
+│││├── b_bn           |      310.723us | 834.563us |    2.020ms |           1
+│││├── b_relu         |       28.906us |  28.906us |  207.488us |           1
+│││├── c              |      388.486us |   1.502ms |    6.914ms |           1
+│││└── c_bn           |      439.659us |   1.222ms |    4.782ms |           1
+││└── relu            |       26.907us |  26.907us |  773.344us |           1
+├── pathway0_pool     |      558.254us |   1.107ms |    3.061ms |           1
+├── s3                |                |           |            |            
+│├── pathway0_res0    |                |           |            |            
+││├── branch1         |      110.793us | 391.166us |    3.889ms |           1
+││├── branch1_bn      |      314.122us | 844.700us |    1.727ms |           1
+││├── branch2         |                |           |            |            
+│││├── a              |      284.361us |   1.087ms |    9.206ms |           1
+│││├── a_bn           |      309.595us | 831.675us |    1.706ms |           1
+│││├── a_relu         |       29.274us |  29.274us |  208.992us |           1
+│││├── b              |      101.171us | 356.013us |    3.186ms |           1
+│││├── b_bn           |      125.190us | 281.521us |  478.400us |           1
+│││├── b_relu         |       28.218us |  28.218us |   66.400us |           1
+│││├── c              |      285.288us |   1.093ms |    3.283ms |           1
+│││└── c_bn           |      327.749us | 887.564us |    1.775ms |           1
+││└── relu            |       26.564us |  26.564us |  208.128us |           1
+│├── pathway0_res1    |                |           |            |            
+││├── branch2         |                |           |            |            
+│││├── a              |       94.783us | 325.138us |    2.281ms |           1
+│││├── a_bn           |      124.949us | 280.607us |  485.472us |           1
+│││├── a_relu         |       28.146us |  28.146us |   66.240us |           1
+│││├── b              |       91.634us | 315.894us |    4.579ms |           1
+│││├── b_bn           |      148.022us | 341.273us |  536.672us |           1
+│││├── b_relu         |       28.039us |  28.039us |   66.656us |           1
+│││├── c              |      283.742us |   1.084ms |    3.267ms |           1
+│││└── c_bn           |      319.293us | 860.169us |    1.746ms |           1
+││└── relu            |       26.235us |  26.235us |  206.976us |           1
+│├── pathway0_res2    |                |           |            |            
+││├── branch2         |                |           |            |            
+│││├── a              |       98.429us | 344.322us |    4.236ms |           1
+│││├── a_bn           |      129.759us | 289.861us |  491.104us |           1
+│││├── a_relu         |       28.075us |  28.075us |   66.848us |           1
+│││├── b              |       90.887us | 314.125us |    4.583ms |           1
+│││├── b_bn           |      131.209us | 296.298us |  492.064us |           1
+│││├── b_relu         |       27.108us |  27.108us |   65.664us |           1
+│││├── c              |      289.962us |   1.112ms |    3.319ms |           1
+│││└── c_bn           |      311.730us | 839.019us |    1.725ms |           1
+││└── relu            |       27.146us |  27.146us |  208.640us |           1
+│├── pathway0_res3    |                |           |            |            
+││├── branch2         |                |           |            |            
+│││├── a              |       89.914us | 310.677us |    2.274ms |           1
+│││├── a_bn           |      261.770us | 690.843us |  886.560us |           1
+│││├── a_relu         |       28.901us |  28.901us |   66.048us |           1
+│││├── b              |      222.070us | 839.494us |    5.099ms |           1
+│││├── b_bn           |      262.921us | 694.033us |  888.288us |           1
+│││├── b_relu         |       27.556us |  27.556us |   66.592us |           1
+│││├── c              |      300.260us |   1.151ms |    3.334ms |           1
+│││└── c_bn           |      307.927us | 829.939us |    1.714ms |           1
+││└── relu            |       25.528us |  25.528us |  206.976us |           1
+├── s4                |                |           |            |            
+│├── pathway0_res0    |                |           |            |            
+││├── branch1         |      247.196us | 941.094us |    4.070ms |           1
+││├── branch1_bn      |      281.097us | 746.672us |    1.042ms |           1
+││├── branch2         |                |           |            |            
+│││├── a              |      248.180us | 942.585us |    8.641ms |           1
+│││├── a_bn           |      281.458us | 749.511us |    1.169ms |           1
+│││├── a_relu         |       28.651us |  28.651us |  114.688us |           1
+│││├── b              |       97.568us | 340.798us |    3.955ms |           1
+│││├── b_bn           |      125.865us | 284.030us |  331.648us |           1
+│││├── b_relu         |       27.487us |  27.487us |   40.960us |           1
+│││├── c              |      251.095us | 955.034us |    2.551ms |           1
+│││└── c_bn           |      288.459us | 771.476us |    1.071ms |           1
+││└── relu            |       26.496us |  26.496us |  114.432us |           1
+│├── pathway0_res1    |                |           |            |            
+││├── branch2         |                |           |            |            
+│││├── a              |       91.775us | 319.774us |    2.693ms |           1
+│││├── a_bn           |      125.319us | 283.024us |  326.720us |           1
+│││├── a_relu         |       28.155us |  28.155us |   40.864us |           1
+│││├── b              |       90.546us | 311.704us |    5.376ms |           1
+│││├── b_bn           |      126.940us | 286.595us |  330.208us |           1
+│││├── b_relu         |       27.893us |  27.893us |   40.960us |           1
+│││├── c              |       98.771us | 343.103us |    1.942ms |           1
+│││└── c_bn           |      293.552us | 785.692us |    1.085ms |           1
+││└── relu            |       25.743us |  25.743us |  113.088us |           1
+│├── pathway0_res2    |                |           |            |            
+││├── branch2         |                |           |            |            
+│││├── a              |       92.414us | 320.190us |    7.107ms |           1
+│││├── a_bn           |      126.304us | 285.175us |  329.376us |           1
+│││├── a_relu         |       27.057us |  27.057us |   40.032us |           1
+│││├── b              |       87.340us | 302.144us |    5.363ms |           1
+│││├── b_bn           |      124.225us | 280.464us |  323.808us |           1
+│││├── b_relu         |       28.002us |  28.002us |   39.840us |           1
+│││├── c              |      249.950us | 951.810us |    2.554ms |           1
+│││└── c_bn           |      282.286us | 749.287us |    1.053ms |           1
+││└── relu            |       26.283us |  26.283us |  113.888us |           1
+│├── pathway0_res3    |                |           |            |            
+││├── branch2         |                |           |            |            
+│││├── a              |       93.818us | 326.447us |    2.688ms |           1
+│││├── a_bn           |      275.167us | 732.209us |  770.240us |           1
+│││├── a_relu         |       27.651us |  27.651us |   40.800us |           1
+│││├── b              |       89.049us | 307.020us |    5.366ms |           1
+│││├── b_bn           |      141.000us | 324.100us |  336.288us |           1
+│││├── b_relu         |       29.589us |  29.589us |   42.016us |           1
+│││├── c              |      260.462us | 992.633us |    2.586ms |           1
+│││└── c_bn           |      281.863us | 749.506us |    1.053ms |           1
+││└── relu            |       26.338us |  26.338us |  113.056us |           1
+│├── pathway0_res4    |                |           |            |            
+││├── branch2         |                |           |            |            
+│││├── a              |       89.831us | 311.056us |    7.091ms |           1
+│││├── a_bn           |      277.678us | 738.239us |  773.984us |           1
+│││├── a_relu         |       28.210us |  28.210us |   40.960us |           1
+│││├── b              |       92.359us | 321.156us |    5.381ms |           1
+│││├── b_bn           |      124.742us | 281.617us |  326.080us |           1
+│││├── b_relu         |       26.989us |  26.989us |   40.480us |           1
+│││├── c              |      272.489us |   1.040ms |    2.636ms |           1
+│││└── c_bn           |      303.383us | 815.925us |    1.115ms |           1
+││└── relu            |       27.418us |  27.418us |  113.024us |           1
+│├── pathway0_res5    |                |           |            |            
+││├── branch2         |                |           |            |            
+│││├── a              |       90.499us | 311.226us |    2.693ms |           1
+│││├── a_bn           |      298.112us | 800.627us |  839.808us |           1
+│││├── a_relu         |       27.947us |  27.947us |   42.304us |           1
+│││├── b              |       89.836us | 311.273us |    5.372ms |           1
+│││├── b_bn           |      126.205us | 284.915us |  328.448us |           1
+│││├── b_relu         |       27.750us |  27.750us |   40.768us |           1
+│││├── c              |      266.974us |   1.020ms |    2.623ms |           1
+│││└── c_bn           |      344.929us | 940.480us |    1.231ms |           1
+││└── relu            |       25.917us |  25.917us |  112.928us |           1
+├── s5                |                |           |            |            
+│├── pathway0_res0    |                |           |            |            
+││├── branch1         |      234.060us | 887.491us |    4.568ms |           1
+││├── branch1_bn      |      266.271us | 703.144us |  866.944us |           1
+││├── branch2         |                |           |            |            
+│││├── a              |      233.399us | 885.232us |    3.405ms |           1
+│││├── a_bn           |      268.820us | 712.672us |  850.240us |           1
+│││├── a_relu         |       28.669us |  28.669us |   67.584us |           1
+│││├── b              |       97.258us | 339.741us |    4.033ms |           1
+│││├── b_bn           |      124.144us | 279.238us |  295.456us |           1
+│││├── b_relu         |       27.361us |  27.361us |   28.672us |           1
+│││├── c              |      238.529us | 903.194us |    2.688ms |           1
+│││└── c_bn           |      265.834us | 703.370us |  873.984us |           1
+││└── relu            |       27.492us |  27.492us |   67.584us |           1
+│├── pathway0_res1    |                |           |            |            
+││├── branch2         |                |           |            |            
+│││├── a              |       92.462us | 320.595us |    8.957ms |           1
+│││├── a_bn           |      125.621us | 283.207us |  298.560us |           1
+│││├── a_relu         |       28.426us |  28.426us |   29.280us |           1
+│││├── b              |       98.441us | 345.022us |    3.999ms |           1
+│││├── b_bn           |      124.337us | 279.453us |  292.768us |           1
+│││├── b_relu         |       27.862us |  27.862us |   28.672us |           1
+│││├── c              |      234.055us | 888.194us |    2.670ms |           1
+│││└── c_bn           |      265.449us | 701.844us |  872.000us |           1
+││└── relu            |       26.644us |  26.644us |   66.176us |           1
+│├── pathway0_res2    |                |           |            |            
+││├── branch2         |                |           |            |            
+│││├── a              |       97.756us | 337.243us |    3.298ms |           1
+│││├── a_bn           |      124.442us | 281.203us |  296.000us |           1
+│││├── a_relu         |       27.338us |  27.338us |   28.672us |           1
+│││├── b              |       99.025us | 347.182us |    4.000ms |           1
+│││├── b_bn           |      125.841us | 284.412us |  298.688us |           1
+│││├── b_relu         |       27.723us |  27.723us |   28.864us |           1
+│││├── c              |      275.942us |   1.049ms |    2.830ms |           1
+│││└── c_bn           |      264.337us | 699.993us |  871.840us |           1
+││└── relu            |       26.052us |  26.052us |   65.600us |           1
+└── head              |                |           |            |            
+ ├── pathway0_avgpool |       44.482us |  44.482us |  772.096us |           1
+ ├── dropout          |       54.577us |  98.266us |   99.648us |           1
+ ├── projection       |      158.808us | 250.594us |  258.944us |           1
+ └── act              |        0.000us |   0.000us |    0.000us |           0
+
+
+------------------------------------  ---------------  ---------------  ---------------  ---------------  ---------------  ---------------  ---------------  ---------------  ---------------  
+Name                                  Self CPU total %  Self CPU total   CPU total %      CPU total        CPU time avg     CUDA total %     CUDA total       CUDA time avg    Number of Calls  
+------------------------------------  ---------------  ---------------  ---------------  ---------------  ---------------  ---------------  ---------------  ---------------  ---------------  
+CudnnConvolutionBackward              1.42%            41.543ms         6.66%            194.857ms        367.654us        29.99%           2.740s           5.170ms          530              
+cudnn_convolution_backward            5.24%            153.313ms        5.24%            153.313ms        289.270us        29.98%           2.738s           5.167ms          530              
+conv3d                                0.65%            19.120ms         2.95%            86.285ms         162.801us        6.34%            579.173ms        1.093ms          530              
+convolution                           0.13%            3.691ms          2.30%            67.165ms         126.726us        6.32%            577.647ms        1.090ms          530              
+_convolution                          0.85%            24.832ms         2.17%            63.474ms         119.762us        6.31%            576.109ms        1.087ms          530              
+cudnn_convolution                     1.25%            36.638ms         1.25%            36.638ms         69.129us         6.27%            572.875ms        1.081ms          530              
+CudnnBatchNormBackward                2.23%            65.391ms         4.19%            122.575ms        231.274us        2.16%            196.977ms        371.655us        530              
+cudnn_batch_norm_backward             1.30%            38.121ms         1.30%            38.121ms         71.926us         2.13%            194.127ms        366.278us        530              
+batch_norm                            0.92%            26.990ms         10.81%           316.239ms        596.678us        1.45%            132.885ms        250.726us        530              
+_batch_norm_impl_index                3.17%            92.745ms         9.88%            289.249ms        545.754us        1.44%            131.403ms        247.931us        530              
+cudnn_batch_norm                      3.54%            103.703ms        3.54%            103.703ms        195.666us        1.34%            122.603ms        231.327us        530              
+add                                   2.52%            73.619ms         2.52%            73.619ms         86.611us         1.20%            109.813ms        129.192us        850              
+ReluBackward1                         0.55%            15.971ms         1.01%            29.697ms         60.607us         1.09%            99.992ms         204.065us        490              
+threshold_backward                    0.47%            13.727ms         0.47%            13.727ms         28.014us         1.08%            98.666ms         201.359us        490              
+relu_                                 2.15%            62.878ms         2.15%            62.878ms         128.323us        0.74%            67.336ms         137.421us        490              
+to                                    61.96%           1.813s           61.97%           1.813s           181.331ms        0.48%            44.218ms         4.422ms          10               
+MaxPool3DWithIndicesBackward          0.01%            336.856us        0.27%            7.797ms          389.863us        0.40%            36.474ms         1.824ms          20               
+max_pool3d_with_indices_backward      0.25%            7.460ms          0.25%            7.460ms          373.021us        0.40%            36.418ms         1.821ms          20               
+max_pool3d                            0.01%            205.587us        0.07%            1.942ms          97.122us         0.18%            16.601ms         830.031us        20               
+max_pool3d_with_indices               0.06%            1.737ms          0.06%            1.737ms          86.842us         0.18%            16.542ms         827.124us        20               
+torch::autograd::AccumulateGrad       4.32%            126.362ms        6.46%            188.947ms        117.358us        0.15%            13.875ms         8.618us          1610             
+add_                                  2.10%            61.352ms         2.10%            61.352ms         42.050us         0.10%            9.364ms          6.418us          1459             
+avg_pool3d                            0.02%            445.784us        0.02%            445.784us        44.578us         0.06%            5.707ms          570.652us        10               
+contiguous                            3.89%            113.907ms        3.89%            113.907ms        30.620us         0.06%            5.173ms          1.391us          3720             
+AvgPool3DBackward                     0.01%            168.284us        0.05%            1.424ms          142.438us        0.04%            3.629ms          362.913us        10               
+avg_pool3d_backward                   0.04%            1.256ms          0.04%            1.256ms          125.610us        0.04%            3.591ms          359.077us        10               
+mm                                    0.20%            5.753ms          0.20%            5.753ms          191.753us        0.02%            1.472ms          49.057us         30               
+MmBackward                            0.02%            513.116us        0.20%            5.953ms          595.291us        0.02%            1.380ms          137.986us        10               
+matmul                                0.01%            265.953us        0.04%            1.213ms          121.266us        0.00%            342.656us        34.266us         10               
+AddBackward0                          0.17%            4.873ms          0.17%            4.873ms          28.665us         0.00%            223.766us        1.316us          170              
+detach                                0.05%            1.516ms          0.05%            1.516ms          9.417us          0.00%            216.719us        1.346us          161              
+ViewBackward                          0.01%            226.351us        0.03%            849.146us        42.457us         0.00%            161.812us        8.091us          20               
+FusedDropoutBackward                  0.01%            188.765us        0.02%            685.452us        68.545us         0.00%            156.438us        15.644us         10               
+reshape                               0.05%            1.601ms          0.07%            2.089ms          69.635us         0.00%            139.812us        4.660us          30               
+CatBackward                           0.00%            112.373us        0.01%            363.540us        36.354us         0.00%            114.891us        11.489us         10               
+_masked_scale                         0.02%            496.687us        0.02%            496.687us        49.669us         0.00%            107.062us        10.706us         10               
+view                                  0.18%            5.130ms          0.18%            5.130ms          85.500us         0.00%            95.172us         1.586us          60               
+log_softmax                           0.01%            157.053us        0.02%            516.147us        51.615us         0.00%            89.312us         8.931us          10               
+unsigned short                        0.02%            629.264us        0.02%            629.264us        12.585us         0.00%            88.797us         1.776us          50               
+dropout                               0.00%            112.844us        0.02%            548.813us        54.881us         0.00%            81.797us         8.180us          10               
+NllLossBackward                       0.02%            492.185us        0.04%            1.302ms          130.245us        0.00%            79.359us         7.936us          10               
+LogSoftmaxBackward                    0.01%            346.592us        0.03%            874.185us        87.418us         0.00%            78.203us         7.820us          10               
+narrow                                0.00%            129.877us        0.01%            251.167us        25.117us         0.00%            70.953us         7.095us          10               
+UnsafeViewBackward                    0.00%            130.514us        0.05%            1.597ms          159.678us        0.00%            66.141us         6.614us          10               
+nll_loss                              0.00%            124.530us        0.02%            608.786us        60.879us         0.00%            66.078us         6.608us          10               
+_log_softmax                          0.01%            359.094us        0.01%            359.094us        35.909us         0.00%            63.578us         6.358us          10               
+PermuteBackward                       0.00%            105.363us        0.01%            248.272us        24.827us         0.00%            61.719us         6.172us          10               
+TBackward                             0.00%            111.027us        0.01%            234.485us        23.448us         0.00%            54.641us         5.464us          10               
+_fused_dropout                        0.01%            435.969us        0.01%            435.969us        43.597us         0.00%            54.516us         5.452us          10               
+sum                                   0.02%            519.045us        0.02%            519.045us        51.904us         0.00%            53.578us         5.358us          10               
+nll_loss_backward                     0.03%            810.268us        0.03%            810.268us        81.027us         0.00%            52.766us         5.277us          10               
+_log_softmax_backward_data            0.02%            527.593us        0.02%            527.593us        52.759us         0.00%            50.453us         5.045us          10               
+nll_loss_forward                      0.02%            484.256us        0.02%            484.256us        48.426us         0.00%            43.547us         4.355us          10               
+permute                               0.01%            288.826us        0.01%            288.826us        14.441us         0.00%            41.234us         2.062us          20               
+cat                                   0.02%            520.137us        0.02%            520.137us        52.014us         0.00%            37.156us         3.716us          10               
+empty                                 0.01%            212.804us        0.01%            212.804us        21.280us         0.00%            32.078us         3.208us          10               
+slice                                 0.00%            121.290us        0.00%            121.290us        12.129us         0.00%            23.094us         2.309us          10               
+torch::autograd::GraphRoot            0.01%            191.522us        0.01%            191.522us        19.152us         0.00%            15.516us         1.552us          10               
+_unsafe_view                          0.00%            110.084us        0.00%            110.084us        11.008us         0.00%            13.094us         1.309us          10               
+------------------------------------  ---------------  ---------------  ---------------  ---------------  ---------------  ---------------  ---------------  ---------------  ---------------  
+Self CPU time total: 2.926s
+CUDA time total: 9.135s
+
