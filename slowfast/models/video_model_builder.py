@@ -613,7 +613,6 @@ class ResNet(nn.Module):
             x = self.head(x, bboxes)
         else:
             x = self.head(x)
-        self.output = x
         return x
 
 

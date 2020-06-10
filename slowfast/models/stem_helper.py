@@ -113,7 +113,6 @@ class VideoModelStem(nn.Module):
         for pathway in range(len(x)):
             m = getattr(self, "pathway{}_stem".format(pathway))
             x[pathway] = m(x[pathway])
-        self.output = x
         return x
 
 

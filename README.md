@@ -45,6 +45,6 @@ ResNet                |                |           |            |
  └── act              |        0.000us |   0.000us |    0.000us |           0
 ```
 
-View trace in [chrome://tracing]() or [edge://tracing](). 
+View trace in [chrome://tracing](chrome://tracing) or [edge://tracing](edge://tracing). 
 
 ![](https://i.loli.net/2020/06/10/lky2e4QJvn3YGCR.png)
